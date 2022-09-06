@@ -1,17 +1,12 @@
-import { Item } from './item'
-export const TopBar: any = () => {
-	const itemNames = ['T1', 'T2', 'T3', 'T4', 'T5']
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+export const TopBar: any = ({name}:{ name:string }) => {
 	return (
 		<>
-			{itemNames.map((name, index) => {
-				return (
-					<>
-						{/* <p>this is item {name}</p> */}
-						<Item name={name} index={index + 1} key={name} />
-					</>
-				)
-			})}
-			<h1>This is Top Bar</h1>
+			<Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center', backgroundColor:'#2c3e50', height:50 }}>
+				<Typography sx={{ minWidth: 100, color:'#0984e3', fontSize:35 }}>Welcome {name}</Typography>
+			</Box>
 		</>
 	)
 }

@@ -1,6 +1,5 @@
 import type { NextPage } from 'next'
-import styles from '../../styles/main.module.scss'
-// import { Grid, Paper, Button, Box, Divider, TextField } from '@mui/material';
+import styles from '../../styles/main.module.scss';
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
@@ -9,12 +8,9 @@ import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
 import {BsGithub} from 'react-icons/bs'
 import { Helmet } from 'react-helmet'
-const loginPage = () => {
-
-	console.log('deepak is here')
-
-
-	return (
+import Typography from '@mui/material/Typography';
+const Result: NextPage = () => {
+  return  (
 		<>
 			<Helmet>
 				<style>{'body { background-color: #222f3e; }'}</style>
@@ -35,7 +31,11 @@ const loginPage = () => {
 							gap: 1.5,
 							flexDirection: 'column',
 						  }}
-					>
+					>	
+						<Divider component="div" role="presentation">
+						{/* any elements nested inside the role="presentation" preserve their semantics. */}
+							<Typography variant="h4">Login</Typography>
+						</Divider>
 						<TextField 
 							placeholder='Pick username'
 							size='small'
@@ -55,6 +55,8 @@ const loginPage = () => {
 				</Paper>
 			</Grid>
 		</>
+
 	)
 }
-export default loginPage
+
+export default Result
