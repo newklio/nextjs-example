@@ -45,6 +45,12 @@ const Login: NextPage = () => {
 									<td>{name}</td>
 									<td>{age}</td>
 									<td>{hobby}</td>
+									<button
+										onClick={async () => {
+											await setData(data.filter(item=> item.name !==name))
+											console.log(data)
+										}}
+									>delete</button>
 								</tr>
 							</>
 						)
