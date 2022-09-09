@@ -32,9 +32,10 @@ const LoginPage: NextPage = () => {
 				console.log(data)
 				if (data && data.login.success) {
 					let token: any = data.login.accessToken
+					let username: any = data.login.payload?.username
 					localStorage.setItem('AUTH_TOKEN', token)
-					let url = `/result/${data.login.payload?.username}`
-					router.push(url)
+					localStorage.setItem('username', username)
+					router.push('/result')
 				}
 				if(!(data?.login.success)){
 					const msg: any = data?.login.message
