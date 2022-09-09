@@ -33,13 +33,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export const ResultData = ({ name }: { name: any }) => {
 	const data:any = {
-		'dk': {
+		'dk404': {
 			'maths': 10,
 			'english': 10,
 			'physics': 9,
 			'hindi': 10
 		},
-		'aman': {
+		'Aman': {
 			'maths': 10,
 			'english': 8,
 			'physics': 7,

@@ -23,6 +23,8 @@ const LoginPage: NextPage = () => {
 		username: '',
 	})
 
+	const [err, setErr] = useState()
+
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
 		login({ variables: FormData })
@@ -31,10 +33,18 @@ const LoginPage: NextPage = () => {
 				if (data && data.login.success) {
 					let token: any = data.login.accessToken
 					localStorage.setItem('AUTH_TOKEN', token)
-					router.push('/results')
+					let url = `/result/${data.login.payload?.username}`
+					router.push(url)
+				}
+				if(!(data?.login.success)){
+					const msg: any = data?.login.message
+					setErr(msg)
 				}
 			})
-			.catch((err) => console.log(err))
+			.catch((err) => {
+				console.log(err)
+				setErr(err)
+			})
 	}
 
 	return (
@@ -60,7 +70,7 @@ const LoginPage: NextPage = () => {
 						}}
 					>
 						<h1>Login</h1>
-						<p>Error Goes here</p>
+						<p>Error Goes here: {err}</p>
 						<TextField
 							onChange={(e) => {
 								setForm({
