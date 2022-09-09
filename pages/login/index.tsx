@@ -23,7 +23,10 @@ const LoginPage: NextPage = () => {
 		username: '',
 	})
 
-	const [err, setErr] = useState()
+	const [err, setErr] = useState({
+		hidden: 'none',
+		msg: ''
+	})
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault()
@@ -39,12 +42,18 @@ const LoginPage: NextPage = () => {
 				}
 				if(!(data?.login.success)){
 					const msg: any = data?.login.message
-					setErr(msg)
+					setErr({
+						hidden: 'show',
+						msg: msg
+					})
 				}
 			})
 			.catch((err) => {
 				console.log(err)
-				setErr(err)
+				setErr({
+					hidden: 'hidden',
+					msg: err
+				})
 			})
 	}
 
@@ -71,7 +80,7 @@ const LoginPage: NextPage = () => {
 						}}
 					>
 						<h1>Login</h1>
-						<p>Error Goes here: {err}</p>
+						<p className={err.hidden}>{err.msg}</p>
 						<TextField
 							onChange={(e) => {
 								setForm({
@@ -91,6 +100,7 @@ const LoginPage: NextPage = () => {
 							}}
 							placeholder="Pick Password"
 							size="small"
+							type='password'
 						/>
 						<Button
 							variant="contained"
