@@ -1,18 +1,41 @@
 import type { NextPage } from 'next'
 import styles from '../../styles/main.module.scss'
-// import { Grid, Paper, Button, Box, Divider, TextField } from '@mui/material';
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Button from '@mui/material/Button'
-import Divider from '@mui/material/Divider'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/material/Box'
-import {BsGithub} from 'react-icons/bs'
+import { BsGithub } from 'react-icons/bs'
 import { Helmet } from 'react-helmet'
-const loginPage = () => {
+import {
+	useLoginMutation,
+	LoginMutationVariables,
+} from '../../generated/graphql'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 
-	console.log('deepak is here')
+const LoginPage: NextPage = () => {
+	const router = useRouter()
+	const [login, { data, loading, error }] = useLoginMutation()
 
+	const [FormData, setForm] = useState<LoginMutationVariables>({
+		secret: '',
+		username: '',
+	})
+
+	const handleSubmit = (e: any) => {
+		e.preventDefault()
+		login({ variables: FormData })
+			.then(({ data }) => {
+				console.log(data)
+				if (data && data.login.success) {
+					let token: any = data.login.accessToken
+					localStorage.setItem('AUTH_TOKEN', token)
+					router.push('/results')
+				}
+			})
+			.catch((err) => console.log(err))
+	}
 
 	return (
 		<>
@@ -21,35 +44,49 @@ const loginPage = () => {
 			</Helmet>
 			<Grid>
 				<Paper className={styles.loginContainer}>
-					<Box 
+					<Box
 						style={{
 							fontFamily: 'ubuntu',
 							fontSize: '90%',
 							fontWeight: '500',
 							opacity: '.92',
-						  }}
-						  sx={{
+						}}
+						sx={{
 							justifyContent: 'center',
 							display: 'flex',
 							m: 3,
 							gap: 1.5,
 							flexDirection: 'column',
-						  }}
+						}}
 					>
-						<TextField 
-							placeholder='Pick username'
-							size='small'
+						<h1>Login</h1>
+						<p>Error Goes here</p>
+						<TextField
+							onChange={(e) => {
+								setForm({
+									...FormData,
+									username: e.target.value,
+								})
+							}}
+							placeholder="Pick username"
+							size="small"
 						/>
-						<TextField 
-							placeholder='Pick Password'
-							size='small'
+						<TextField
+							onChange={(e) => {
+								setForm({
+									...FormData,
+									secret: e.target.value,
+								})
+							}}
+							placeholder="Pick Password"
+							size="small"
 						/>
 						<Button
-							variant='contained'
-							color='success'
+							variant="contained"
+							onClick={handleSubmit}
+							color="success"
 						>
-							<BsGithub /> {' '}
-							login
+							<BsGithub /> login
 						</Button>
 					</Box>
 				</Paper>
@@ -57,4 +94,4 @@ const loginPage = () => {
 		</>
 	)
 }
-export default loginPage
+export default LoginPage

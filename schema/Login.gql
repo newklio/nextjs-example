@@ -1,0 +1,47 @@
+mutation Login($username: String!, $secret: String!) {
+	login(username: $username, secret: $secret) {
+		code
+		success
+		message
+		accessToken
+		payload {
+			uid
+			username
+			fullname
+			phone
+			gender
+			address
+			city
+			state
+			country
+			university
+			pincode
+			age
+			avatar
+			converImg
+			email
+			bio
+			dob
+			allowedMode {
+				creator
+				professional
+				student
+				player
+				developer
+				currentMode
+			}
+			webFcmToken
+			refreshToken
+			lastLogin
+			domain
+			cloudResource {
+				resourceId
+				name
+				token
+				duration
+				ram
+				storage
+			}
+		}
+	}
+}
