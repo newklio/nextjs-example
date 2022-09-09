@@ -1,0 +1,12 @@
+overwrite: true
+schema: "http://kfa-server:4000"
+documents: "schema/**/*.gql"
+generates:
+  generated/graphql.tsx:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+  ./graphql.schema.json:
+    plugins:
+      - "introspection"
