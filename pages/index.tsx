@@ -1,24 +1,14 @@
 import type { NextPage } from 'next'
 import { TopBar } from '../components/topbar'
-import { useQuery, gql } from '@apollo/client'
-
-const query = gql`
-	query Hello {
-		hello
-	}
-`
-
-interface Ihello {
-	hello: string
-}
+import { useHelloQuery } from '../generated/graphql'
 
 const Home: NextPage = () => {
-	const { data, loading, error } = useQuery<Ihello>(query)
-	console.log(data)
+	const { data, loading, error } = useHelloQuery()
 	return (
 		<>
-			<h1>{data?.hello}</h1>
 			<TopBar></TopBar>
+
+			<h2>Data from Server: {data?.hello}</h2>
 		</>
 	)
 }
