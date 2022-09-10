@@ -1,0 +1,60 @@
+mutation CreateUser($form: CreateUserInput!) {
+  createUser(form: $form) {
+    code
+    success
+    message
+    accessToken
+    payload {
+      uid
+      username
+      fullname
+      phone
+      gender
+      address
+      city
+      state
+      country
+      university
+      pincode
+      age
+      avatar
+      converImg
+      email
+      bio
+      dob
+      allowedMode {
+        creator
+        professional
+        student
+        player
+        developer
+        currentMode
+      }
+      webFcmToken
+      refreshToken
+      lastLogin
+      domain
+      cloudResource {
+        resourceId
+        name
+        token
+        duration
+        ram
+        storage
+      }
+    }
+  }
+}
+
+type CreateUserInput {
+    username: String!,
+    fullname: String!,
+    secret: String!,
+    email: String!,
+}
+
+enum Gender {
+    Male
+    Female
+    Others
+}
