@@ -2359,6 +2359,13 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { __typename?: 'Mutation', login: { __typename?: 'loginResp', code?: number | null, success?: boolean | null, message?: string | null, accessToken?: string | null, payload?: { __typename?: 'User', uid?: string | null, username?: string | null, fullname?: string | null, phone?: string | null, gender?: Gender | null, address?: string | null, city?: string | null, state?: string | null, country?: string | null, university?: string | null, pincode?: number | null, age?: number | null, avatar?: string | null, converImg?: string | null, email?: any | null, bio?: string | null, dob?: any | null, webFcmToken?: string | null, refreshToken?: string | null, lastLogin?: any | null, domain?: UserDomain | null, allowedMode?: { __typename?: 'AllowedMode', creator?: boolean | null, professional?: boolean | null, student?: boolean | null, player?: boolean | null, developer?: boolean | null, currentMode?: Usermode | null } | null, cloudResource?: { __typename?: 'CloudResource', resourceId?: string | null, name?: string | null, token?: string | null, duration?: number | null, ram?: number | null, storage?: number | null } | null } | null } };
 
+export type CreateUserMutationVariables = Exact<{
+  form: CreateUserInput;
+}>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser: { __typename?: 'createUserResp', code?: number | null, success?: boolean | null, message?: string | null, accessToken?: string | null, payload?: { __typename?: 'User', uid?: string | null, username?: string | null, fullname?: string | null, phone?: string | null, gender?: Gender | null, address?: string | null, city?: string | null, state?: string | null, country?: string | null, university?: string | null, pincode?: number | null, age?: number | null, avatar?: string | null, converImg?: string | null, email?: any | null, bio?: string | null, dob?: any | null, webFcmToken?: string | null, refreshToken?: string | null, lastLogin?: any | null, domain?: UserDomain | null, allowedMode?: { __typename?: 'AllowedMode', creator?: boolean | null, professional?: boolean | null, student?: boolean | null, player?: boolean | null, developer?: boolean | null, currentMode?: Usermode | null } | null, cloudResource?: { __typename?: 'CloudResource', resourceId?: string | null, name?: string | null, token?: string | null, duration?: number | null, ram?: number | null, storage?: number | null } | null } | null } };
+
 export type HelloQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2441,6 +2448,81 @@ export function useLoginMutation(baseOptions?: Apollo.MutationHookOptions<LoginM
 export type LoginMutationHookResult = ReturnType<typeof useLoginMutation>;
 export type LoginMutationResult = Apollo.MutationResult<LoginMutation>;
 export type LoginMutationOptions = Apollo.BaseMutationOptions<LoginMutation, LoginMutationVariables>;
+export const CreateUserDocument = gql`
+    mutation CreateUser($form: CreateUserInput!) {
+  createUser(form: $form) {
+    code
+    success
+    message
+    accessToken
+    payload {
+      uid
+      username
+      fullname
+      phone
+      gender
+      address
+      city
+      state
+      country
+      university
+      pincode
+      age
+      avatar
+      converImg
+      email
+      bio
+      dob
+      allowedMode {
+        creator
+        professional
+        student
+        player
+        developer
+        currentMode
+      }
+      webFcmToken
+      refreshToken
+      lastLogin
+      domain
+      cloudResource {
+        resourceId
+        name
+        token
+        duration
+        ram
+        storage
+      }
+    }
+  }
+}
+    `;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *      form: // value for 'form'
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const HelloDocument = gql`
     query Hello {
   hello
